@@ -1,1 +1,170 @@
+╔══════════════════════════════════════════════════════════════╗
+║              JAVA OOP — ISPITNA MINI MAPA                    ║
+║                    CILJ: PROLAZ (2)                          ║
+╚══════════════════════════════════════════════════════════════╝
 
+                    ┌─────────────────┐
+                    │   ISPIT         │
+                    │   ZAD 1 + ZAD 2 │
+                    └────────┬────────┘
+                             │
+              ┌──────────────┴──────────────┐
+              ▼                             ▼
+     ┌─────────────────┐           ┌─────────────────┐
+     │    ZADATAK 1    │           │    ZADATAK 2    │
+     │   FILE + OOP    │           │    SWING GUI    │
+     └────────┬────────┘           └────────┬────────┘
+              │                             │
+      ┌───────┼────────┐            ┌───────┼──────────┐
+      ▼       ▼        ▼            ▼       ▼          ▼
+   KLASA    ENUM    ARRAYLIST      JFrame  PANELS   LISTENER
+      │       │        │             │       │          │
+      │       │        │             │       │          │
+      ▼       ▼        ▼             ▼       ▼          ▼
+ atributi  statusi  objekti       MainFrame FormPanel  ViewPanel
+ konstruk. PRIHVACEN  kolekcija       │        │          │
+ get/set   DODATNA                    │        │          │
+ toString  ODBIJEN                    │        └────┐     │
+      │                               │             │     │
+      └──────────────┐                 ▼             ▼    │
+                     ▼          FormPanelListener ────────┘
+              ┌──────────────┐
+              │ DATOTEKE     │
+              └──────┬───────┘
+                     │
+             ┌───────┴────────┐
+             ▼                ▼
+        podaci_zad_1.txt   izvjestaj.txt
+             │
+             ▼
+          greske.txt
+
+
+══════════════════════════════════════════════════════════════
+                     ZADATAK 1 — REDOSLIJED
+══════════════════════════════════════════════════════════════
+
+ TXT
+  │
+  ▼
+ČITANJE
+  │
+  ▼
+SPLIT ";"
+  │
+  ▼
+VALIDACIJA
+  │
+  ├──── NEISPRAVNO ────► greske.txt
+  │
+  └──── ISPRAVNO
+          │
+          ▼
+   UzorakKontrola
+          │
+          ├── temperatura
+          ├── vlaznost
+          ├── pakiranje
+          ├── oznaka
+          ├── materijal
+          └── laboratorij
+          │
+          ▼
+    izracunajStatus()
+          │
+      ┌───┼──────────────┐
+      ▼   ▼              ▼
+ PRIHVACEN DODATNA_    ODBIJEN
+           PROVJERA
+          │
+          ▼
+   ArrayList<UzorakKontrola>
+          │
+          ▼
+     izvjestaj.txt
+          │
+          ├── podaci
+          ├── *
+          └── SAZETAK
+
+
+══════════════════════════════════════════════════════════════
+                     ZADATAK 2 — REDOSLIJED
+══════════════════════════════════════════════════════════════
+
+                     MainFrame
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+         FormPanel              ViewPanel
+              │                     │
+              │                     ▼
+              │                 JTextArea
+              │
+              ▼
+       korisnik unosi
+              │
+              ▼
+       "Dodaj aktivnost"
+              │
+              ▼
+      FormPanelListener
+              │
+              ▼
+       MainFrame / kontrola
+              │
+              ▼
+    ArrayList<AktivnostUcenja>
+              │
+              ▼
+       osvježi prikaz
+              │
+              ▼
+          ViewPanel
+
+
+══════════════════════════════════════════════════════════════
+                       ŠTO NE ZABORAVITI
+══════════════════════════════════════════════════════════════
+
+       ┌─────────────────────────────────────────┐
+       │             ❌ NE RADITI                │
+       ├─────────────────────────────────────────┤
+       │ ❌ lambda izrazi                        │
+       │ ❌ sve u jednoj ogromnoj klasi          │
+       │ ❌ public konstante umjesto enum-a      │
+       │ ❌ metoda koja radi 2 različite stvari  │
+       │ ❌ FormPanel + ViewPanel spojene        │
+       └─────────────────────────────────────────┘
+
+       ┌─────────────────────────────────────────┐
+       │             ✅ MORATI ZNATI             │
+       ├─────────────────────────────────────────┤
+       │ ✅ OOP klase                             │
+       │ ✅ enum                                  │
+       │ ✅ ArrayList                             │
+       │ ✅ TXT čitanje / pisanje                 │
+       │ ✅ try / catch                           │
+       │ ✅ validacija                            │
+       │ ✅ SRP                                   │
+       │ ✅ JFrame / JPanel                       │
+       │ ✅ FormPanel / ViewPanel                 │
+       │ ✅ Listener                              │
+       │ ✅ MainFrame kao kontroler               │
+       └─────────────────────────────────────────┘
+
+
+══════════════════════════════════════════════════════════════
+                    AKO CILJAŠ VIŠU OCJENU
+══════════════════════════════════════════════════════════════
+
+        ZAD 1 + ZAD 2
+              │
+       ┌──────┼────────┬───────────┐
+       ▼      ▼        ▼           ▼
+      (2)    (3)      (4)         (5)
+              │        │           │
+              ▼        ▼           ▼
+          SEARCH +  INHERIT +   INTERFACE +
+          SORT      POLYMORPH.  SERIALIZATION
+                    + SERIALIZE
