@@ -10,3 +10,15 @@ public class UzorakKontrola {
     private String pakiranje;
 
 }
+
+public UzorakKontrola(String oznaka, String materijal,
+                      String laboratorij, int temperatura,
+                      int vlaznost, String pakiranje) {
+
+    this.oznaka = oznaka;
+    this.materijal = materijal;
+    this.laboratorij = laboratorij;
+    this.temperatura = temperatura;
+    this.vlaznost = vlaznost;
+    this.pakiranje = pakiranje;
+}
