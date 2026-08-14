@@ -1,0 +1,87 @@
+📦 zad_1
+│
+├── 📄 UzorakKontrola.java
+│       │
+│       ├── atributi
+│       ├── konstruktor
+│       ├── getteri / setteri
+│       ├── toString()
+│       ├── izracunajStatus()
+│       └── jeKriticanZapis()
+│
+├── 📄 Status.java
+│       │
+│       └── enum
+│             ├── PRIHVACEN
+│             ├── DODATNA_PROVJERA
+│             └── ODBIJEN
+│
+├── 📄 UcitavanjePodataka.java
+│       │
+│       └── čita podaci_zad_1.txt
+│
+├── 📄 Validacija.java
+│       │
+│       └── provjerava podatke
+│
+└── 📄 Main.java
+        │
+        └── povezuje sve zajedno
+
+
+
+
+📦 zad_2
+│
+├── 📄 AktivnostUcenja.java
+│       │
+│       ├── naziv
+│       ├── tema
+│       ├── tip
+│       ├── trajanje
+│       └── napomena
+│
+├── 📄 TipAktivnosti.java
+│       │
+│       └── enum
+│             ├── CITANJE
+│             ├── VJEZBA
+│             ├── PONAVLJANJE
+│             └── PROJEKT
+│
+├── 📄 MainFrame.java
+│       │
+│       └── 🎮 KONTROLER
+│             │
+│             ├───────────────┐
+│             ▼               ▼
+│        FormPanel         ViewPanel
+│             │               │
+│             ▼               ▼
+│        unos podataka    prikaz podataka
+│             │
+│             ▼
+│      FormPanelListener
+│
+├── 📄 FormPanel.java
+│       │
+│       ├── JTextField
+│       ├── JComboBox
+│       ├── JButton
+│       └── unos aktivnosti
+│
+├── 📄 ViewPanel.java
+│       │
+│       └── JTextArea
+│             │
+│             └── prikaz aktivnosti
+│
+├── 📄 FormPanelListener.java
+│       │
+│       └── komunikacija
+│           FormPanel → MainFrame
+│
+└── 📄 AUX_RW.java
+        │
+        ├── čitanje TXT
+        └── pisanje TXT
