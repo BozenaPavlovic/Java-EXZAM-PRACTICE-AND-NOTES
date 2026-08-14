@@ -22,3 +22,27 @@ public UzorakKontrola(String oznaka, String materijal,
     this.vlaznost = vlaznost;
     this.pakiranje = pakiranje;
 }
+
+
+public Status izracunajStatus() {
+
+    if (temperatura >= 2 && temperatura <= 8
+            && vlaznost <= 60
+            && pakiranje.equals("DA")) {
+
+        return Status.PRIHVACEN;
+    }
+
+    if (pakiranje.equals("DA")
+            && ((temperatura >= -1 && temperatura <= 1)
+            || (temperatura >= 9 && temperatura <= 12)
+            || (vlaznost >= 61 && vlaznost <= 75))) {
+
+        return Status.DODATNA_PROVJERA;
+    }
+
+    return Status.ODBIJEN;
+}
+
+// && = SVE mora biti true
+// || = BAREM JEDNO mora biti true, ILI
