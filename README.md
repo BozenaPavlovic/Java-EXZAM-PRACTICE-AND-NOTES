@@ -99,12 +99,13 @@ public class Menadzer extends Zaposlenik {
 
 **KLJUCNI POJMOVI:**
 
-- **EXTENDS**: Kljucna rec - znaci "nasljeduje od" bazne klase
-  - `public class Programer extends Zaposlenik`
-  - Programer postaje **PODKLASA** od Zaposlenik
-  - Programer AUTOMATSKI dobija sve varijable i metode iz Zaposlenik
-  - Relacija: **"JE" odnos** - Programer JE vrsta Zaposlenika
-  - Primer: Ako Zaposlenik ima `getIme()`, Programer ga ima bez da ga pise
+- Nasljeđivanje (Inheritance): Mehanizam koji omogućuje jednoj klasi (podklasi) da preuzme stanja i ponašanja druge klase (superklase), čime se izbjegava dupliciranje koda (DRY princip).
+
+- Ključna riječ extends: Oznaka kojom se definira odnos nasljeđivanja. Označava da podklasa proširuje baznu klasu (izgradnja "IS-A" ili "JEST" odnosa, npr. Programer JEST Zaposlenik).
+
+- Prava podklase: Podklasa automatski nasljeđuje sva public i protected polja i metode iz bazne klase te ih može dodatno proširiti novim funkcionalnostima ili prepisati postojeće.
+
+- Modifikator protected: Omogućuje pristup članovima klase unutar istog paketa i svim njezinim podklasama, dok je za ostale klase nevidljiv.
 
 - **EXTENDS ZNACI**: 
   - Nasljedi sve od Zaposlenika
@@ -166,13 +167,13 @@ public class Programer extends Zaposlenik {
 
 **KLJUCNI POJAM - @Override:**
 
-- **@Override**: Anotacija - oznacava da metod **PREPISUJE** metod iz bazne klase
-  - To NIJE obavezno, ALI je JAKO PREPORUČENO jer:
-    1. **Jasnost** - čitaoci znaju da je ovo prepis, ne novi metod
-    2. **Sigurnost** - Java ce prijaviti grešku ako:
-       - Nema tog metoda u baznoj klasi
-       - Ime ili parametri se razlikuju
-    3. **Održavanje** - ako bazna klasa promijeni metod, Java vas obavijesti
+- Anotacija @Override: Uputa prevoditelju (compileru) da metoda u podklasi namjerno premošćuje (zamjenjuje) metodu iz bazne klase s identičnim potpisom (naziv, povratni tip i parametri).
+
+- Zašto je ključna primjena @Override?
+
+1. Sigurnost prevoda: Ako pogrešno napišete naziv metode ili parametre, prevoditelj javlja grešku umjesto da tiho stvori novu neovisnu metodu.
+
+2. Čitljivost: Jasno označava razvojnim inženjerima da je ponašanje metode prilagođeno specifičnoj podklasi.
 
 - **PRIMJER GREŠKE koja @Override hvata**:
 ```java
