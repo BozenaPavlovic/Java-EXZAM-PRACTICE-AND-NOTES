@@ -201,34 +201,56 @@ public class Zaposlenik {
 }
 
 public class Programer extends Zaposlenik {
+    
     @Override
     public double izracunajPlaku() {
-        // super.izracunajPlaku() - poziva metod iz Zaposlenika
-        double bazna = super.izracunajPlaku();  // 50000
+        // Ključna riječ 'super' omogucava pozivanje metode iz roditeljske klase (Zaposlenik).
+        // Ovim pozivom se prvo izvršava originalna logika roditelja kako bi se dobila osnovna vrijednost.
+        double bazna = super.izracunajPlaku();  // Vraća baznu plaću iz klase Zaposlenik (npr. 50000)
+        
         double bonus = 10000;
-        return bazna + bonus;  // 60000
+        
+        // Vraćamo ukupnu sumu: osnovica iz roditeljske klase + specifični bonus za Programera
+        return bazna + bonus;  // Vraća 60000
     }
     
     @Override
     public void prikaziInfos() {
-        super.prikaziInfos();  // Ispisuje: "Zaposlenik je radnik"
+        // 'super.prikaziInfos()' poziva verziju metode iz roditeljske klase.
+        // Umjesto potpunog prepisivanja (overriding) metode, prvo nadograđujemo postojeće ponašanje.
+        super.prikaziInfos();  // Ispisuje osnovne informacije roditelja (npr. "Zaposlenik je radnik")
+        
+        // Nakon što se izvršio ispis iz roditeljske klase, dodajemo specifični ispis za klasu Programer
         System.out.println("Programer je vrsta zaposlenika");
     }
 }
 
 public class SeniorProgramer extends Programer {
+    // Privatna varijabla specifična samo za SeniorProgramer klasu
     private int godineIskustva;
     
-    // Konstruktor - super() poziva konstruktor bazne klase
+    // Konstruktor klase SeniorProgramer
     public SeniorProgramer(String ime, double baznaPlaca, int godine) {
-        super(ime, baznaPlaca);  // Poziva Programer konstruktor
+        // 'super(ime, baznaPlaca)' poziva konstruktor roditeljske klase (Programer).
+        // Pravilo u Javi: poziv super(...) konstruktora MORA biti prva linija u konstruktoru podklase.
+        // Na ovaj način roditeljska klasa prva inicijalizira svoja polja (ime i baznaPlaca).
+        super(ime, baznaPlaca);
+        
+        // 'this' se odnosi na trenutni objekat ove klase.
+        // Koristi se za pridruživanje proslijeđenog parametra 'godine' polju 'godineIskustva'.
         this.godineIskustva = godine;
     }
     
     @Override
     public double izracunajPlaku() {
-        double placa = super.izracunajPlaku();  // Poziva Programer verziju (60000)
+        // 'super.izracunajPlaku()' poziva verziju metode iz roditeljske klase (Programer).
+        // Time dobivamo izračunatu plaću programera (bazna plaća + programerski bonus, npr. 60000).
+        double placa = super.izracunajPlaku();
+        
+        // Izračunavamo dodatni bonus na osnovu godina iskustva
         double dodatniBonus = godineIskustva * 1000;
+        
+        // Vraćamo konačan iznos: plaća iz klase Programer + dodatni senior bonus
         return placa + dodatniBonus;
     }
 }
