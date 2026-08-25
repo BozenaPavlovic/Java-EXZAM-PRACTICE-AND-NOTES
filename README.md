@@ -143,28 +143,6 @@ p.radi();  // Ispisuje: "Ana programira"
 
 ## 3. **@Override - Anotacija**
 
-```java
-public class Zaposlenik {
-    public double izracunajPlaku() {
-        return 50000;
-    }
-}
-
-public class Programer extends Zaposlenik {
-    
-    // LOSE - bez @Override (opasno!)
-    public double izracunajPlaku() {
-        return 60000;
-    }
-    
-    // DOBRO - sa @Override (preporučeno!)
-    @Override
-    public double izracunajPlaku() {
-        return 60000;
-    }
-}
-```
-
 **KLJUCNI POJAM - @Override:**
 
 - Anotacija @Override: Uputa prevoditelju (compileru) da metoda u podklasi namjerno premošćuje (zamjenjuje) metodu iz bazne klase s identičnim potpisom (naziv, povratni tip i parametri).
@@ -178,24 +156,30 @@ public class Programer extends Zaposlenik {
 - **PRIMJER GREŠKE koja @Override hvata**:
 ```java
 public class Zaposlenik {
-    public double izracunajPlaku() { return 50000; }
+    public double izracunajPlaku() { 
+        return 50000; 
+    }
 }
 
+// PRIMJER 1: Kako nas @Override štiti od sintaksnih grešaka
 public class Programer extends Zaposlenik {
     @Override
-    public double izracunajPlackuu() {  // GRESNI NAZIV (plackuu umjesto plaku)
+    public double izracunajPlackuu() {  
         return 60000;
     }
-    // GREŠKA: Java javlja - "Ne postoji metod izracunajPlackuu u Zaposleniku"
+    // KOMPAJLERSKA GREŠKA: Prevoditelj javlja grešku pri prevođenju ("Method does not override method from its superclass").
+    // Razlog: @Override obvezuje Java-u da provjeri potpis metode u roditeljskoj klasi. 
+    // Zbog tipfelera ("izracunajPlackuu"), poklapanje ne postoji i kod se uopće NE MOŽE pokrenuti.
 }
 
-// Bez @Override:
+// PRIMJER 2: Opasnost od izostavljanja @Override anotacije
 public class Programer extends Zaposlenik {
-    public double izracunajPlackuu() {  // NECE BITI GRESKA!
+    public double izracunajPlackuu() {  
         return 60000;
     }
-    // PROBLEM: To je novi metod, NE prepis!
-    // izracunajPlaku() i dalje dolazi iz Zaposlenika
+    // LOGIČKA GREŠKA (BUG): Kod se uspješno kompajlira bez greške!
+    // Izravna posljedica: Nismo premostili (overridali) izracunajPlaku(), nego smo stvorili novu neovisnu metodu.
+    // Poziv programer.izracunajPlaku() i dalje vraća 50000 umjesto 60000.
 }
 ```
 
