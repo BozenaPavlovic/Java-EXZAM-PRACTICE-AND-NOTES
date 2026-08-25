@@ -41,21 +41,15 @@ public class Osoba {
 
 **KLJUCNI POJMOVI:**
 
-- **PRIVATE**: Modifikator pristupa - varijabla je dostupna SAMO u toj klasi
-  - `private double placa;` - samo ta klasa moze pristupiti
-  - Osigurava da nitko ne moze direktno promijeniti vrijednost
+- Enkapsulacija (Čahurenje): Proces skrivanja unutrašnjeg stanja objekta i izlaganja funkcionalnosti samo kroz kontrolirano javno sučelje (public interface).
 
-- **PUBLIC**: Modifikator pristupa - varijabla je dostupna svima
-  - `public String ime;` - dostupna je svima, bez kontrole
-  - OPASNO - bilo tko moze postaviti bilo koju vrijednost
+- private: Modifikator pristupa koji ograničava vidljivost članova (polja/metoda) isključivo na unutrašnjost iste klase. Onemogućuje izravno modificiranje unutrašnjeg stanja izvan klase.
 
-- **Getter**: Javni metod koji KONTROLISANO vraca vrijednost privatne varijable
-  - `public String getIme() { return ime; }` - samo citanje, nema promjene
-  - Ako trebate dodatnu logiku (transformaciju podataka) - radite je tu
+- public: Modifikator pristupa koji čini član klase vidljivim iz bilo kojeg dijela aplikacije. Koristi se oprezno, uglavnom za javne metode (API klase).
 
-- **Setter**: Javni metod koji KONTROLISANO postavlja vrijednost privatne varijable
-  - `public void setIme(String novoIme)` - moze validirati prije nego postavi
-  - Sprjecava nevaljane vrijednosti (npr. null, negativni brojevi)
+- Getter (Čitač): Javna metoda koja sigurno vraća trenutnu vrijednost privatnog polja (omogućuje pristup samo za čitanje).
+
+- Setter (Pisač): Javna metoda koja omogućuje izmjenu privatnog polja uz prethodnu provjeru valjanosti podataka (validaciju), čime se čuva integritet objekta.
 
 ### Zasto je ovo vazno?
 
@@ -952,4 +946,3 @@ SOLID PRINCIPI
 - Interfejsi su FLEKSIBILNOST
 - Abstract klase su SABLONA
 
-**Rezultat:** Kod koji je lako razumevljiv, održavan, testabilan i fleksibilan! 🚀
