@@ -262,6 +262,23 @@ public class SeniorProgramer extends Programer {
   - `super.metod()` - poziva metod iz roditeljske klase
   - `super.varijabla` - pristupa varijabli iz roditeljske klase
   - `super(parametri)` - poziva konstruktor roditeljske klase
+ 
+- Ključna riječ super u Javi služi kao referenca na direktnu roditeljsku (baznu) klasu. Bez nje, podklasa ne bi mogla pristupati naslijeđenim članovima koje je sama pregazila (@Override) ili inicijalizirati roditeljski dio objekta.
+
+- Ključni razlozi i koncepti koje trebaš razumjeti za skriptu objašnjeni su u nastavku.
+
+- Zašto koristimo super(...) u konstruktoru?
+- Kada kreiraš objekt podklase (npr. SeniorProgramer), Java iza kulisa mora prvo napraviti i inicijalizirati roditeljski dio tog objekta (Programer, pa Zaposlenik).
+
+- Inicijalizacija roditelja: Roditeljska klasa čuva svoja polja (poput ime i baznaPlaca). Podklasa im često nema direktan pristup ako su definirana kao private. Pozivom super(ime, baznaPlaca) prepuštaš roditelju da ispravno podesi vlastite podatke.
+
+- Pravilo prve linije: Java zahtijeva da super(...) bude prva linija u konstruktoru podklase. Objekat roditelja mora postojati u memoriji prije nego što podklasa doda svoja specifična polja (this.godineIskustva = godine).
+
+- Zašto ne nešto drugo?
+
+- this(...) ne može zamijeniti super(...) jer this(...) poziva drugi konstruktor unutar iste klase, a ne konstruktor roditelja.
+
+- Ne možeš napisati Programer(ime, baznaPlaca) jer se konstruktori ne nasljeđuju kao obične metode i ne mogu se pozvati po imenu klase nad objektom u nastajanju.
 
 - **SUPER.METOD() - PRIMJENA**:
 ```java
@@ -344,6 +361,42 @@ Zaposlenik z3 = new Menadzer();         // Menadzer kao Zaposlenik
 System.out.println(z1.izracunajPlaku());  // 50000 (Zaposlenik verzija)
 System.out.println(z2.izracunajPlaku());  // 60000 (Programer verzija)
 System.out.println(z3.izracunajPlaku());  // 55000 (Menadzer verzija)
+
+
+Nastavljamo s **Polimorfizmom** — isključivo objašnjenja i teorijski koncepti za tvoju skriptu na hrvatskom jezik:
+
+# Polimorfizam (Polymorphism)
+
+---
+
+### Kako Polimorfizam radi pod haubom?
+
+Za razumijevanje polimorfizma u Javi (dinamički / *runtime* polimorfizam), ključno je razlikovati dva pojma:
+
+* **Referentni tip (Tip varijable):** Određuje što prevoditelj (kompajler) uopće dopušta pozvati. U zapisu `Zaposlenik z = new Programer();`, referentni tip je `Zaposlenik`. Kompajler vidi samo metode definirane u klasi `Zaposlenik`.
+* **Stvarni tip (Tip objekta u RAM-u):** Određuje koja će se verzija metode *stvarno* izvršiti. U istom zapisu, stvarni tip u memoriji je `Programer`.
+
+> **Kasno povezivanje (Dynamic Binding):** Kada se izvršava poziv `z.izracunajPlaku()`, Java virtuelni stroj (JVM) ne gleda kako je varijabla deklarirana, nego u trenutku izvršavanja (runtime) provjerava čiji se objekt nalazi u memoriji i pokreće njegovu pregaženu (`@Override`) metodu.
+
+---
+
+### Zašto je Polimorfizam važan? (Praktične prednosti)
+
+1. **Jednostavno proširivanje koda (Open/Closed Načelo):**
+Ako u sustav dodaš novu podklasu (npr. `Dizajner extends Zaposlenik`), sve postojeće metode koje primaju `Zaposlenik` radit će s novom klasom automatski — bez mijenjanja linije postojećeg koda.
+2. **Uklanjanje grananja (`if-else` / `switch`):**
+Bez polimorfizma moralo bi se ručno provjeravati tip svakog objekta (npr. pomoću `instanceof`) i pisati posebna logika za svaku vrstu zaposlenika. Polimorfizam prepušta tu odluku Javi.
+
+---
+
+### Dvije vrste Polimorfizma u Javi
+
+| Svojstvo | Dinamički (Runtime) Polimorfizam | Statički (Compile-time) Polimorfizam |
+| --- | --- | --- |
+| **Mehanizam** | Pregazivanje metoda (**Method Overriding**) | Preopterećenje metoda (**Method Overloading**) |
+| **Kako radi** | Podklasa daje novu implementaciju naslijeđene metode. | Više metoda s istim imenom, ali različitim parametrima unutar iste klase. |
+| **Odluka o pozivu** | Tijekom izvršavanja programa (JVM) | Tijekom prevođenja koda (Kompajler) |
+
 ```
 
 ---
@@ -410,6 +463,33 @@ public class Bicikl extends Vozilo {
 - **APSTRAKCIJA**: Skrivanje komplejnih detalja, izlaganje samo bitnog
   - Korisnik Automobila ne trebai znati kako tocno radi motor
   - Samo trebai znati: `automobil.pokreni()`
+ 
+# Apstrakcija (Abstraction) - ABSTRACT
+
+---
+
+### Ključna pravila apstraktnih klasa i metoda
+
+* **Zabrana instanciranja:** Nije moguće napraviti objekt izravno iz apstraktne klase (`new Vozilo()` vraća grešku pri prevođenju). Apstraktna klasa služi isključivo kao **predložak (šablona)** za nasljeđivanje.
+* **Ugovor o implementaciji:** Ako klasa sadrži barem jednu `abstract` metodu, i sama klasa **mora** biti označena kao `abstract`. Podklasa koja nasljeđuje apstraktnu klasu mora obavezno implementirati sve njezine apstraktne metode (koristeći `@Override`), osim ako i sama podklasa nije apstraktna.
+* **Kombiniranje metoda:** Apstraktna klasa može sadržavati i apstraktne metode (bez tijela `{}`) i konkretne metode (s potpunom logikom unutar `{}`).
+
+---
+
+### Zašto koristimo `final` metode u apstraktnim klasama?
+
+* **Zaključavanje logike:** Kada se metoda označi s `final` (kao `prikaziMarku()`), podklasama je strogo zabranjeno mijenjati njezinu logiku putem `@Override`.
+* **Konzistentnost sustava:** Jamči da će sve podklase (`Automobil`, `Bicikl`) izvoditi točno određeno ponašanje na identičan način.
+
+---
+
+### Apstrakcija vs. Enkapsulacija (Česta nedoumica)
+
+| Pojam | Fokus | Što zapravo radi? |
+| --- | --- | --- |
+| **Apstrakcija** | **Dizajn (ŠTO)** | Skriva složenost sustava i izlaže samo bitne funkcionalnosti kroz sučelja ili apstraktne klase. |
+| **Enkapsulacija** | **Sigurnost (KAKO)** | Pakira podatke i metode unutar klase te ih štiti od neovlaštenog pristupa (koristeći `private` polje i `getter`/`setter` metode). |
+
 
 ---
 
